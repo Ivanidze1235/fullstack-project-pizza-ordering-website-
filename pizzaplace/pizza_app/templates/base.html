@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <style>
+            .nav-link{
+                background: #222222; !important
+            }
+        </style>
+        <title>Pizza.com</title>
+    </head>
+    
+    
+    <body>
+        <div class="card">
+        <div class="card-header">Header</div>
+        {% block nav %}
+        <nav class="nav nav-pills flex-row">
+            <a {% if request.get_full_path == "/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/">Main</a>
+            
+            <a {% if request.get_full_path == "/order/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/order">Order</a>
+            
+        </nav>
+        {% endblock nav %}
+        {% block body %}
+        <div class="card-body">
+            <h4 class="card-title">This is a placeholder</h4>
+            <p>The current URL is: {{ request.get_full_path }}</p>
+            <p class="card-text">remove this if possible</p>
+        </div>
+        {% endblock body %}
+        
+        <div class="card-footer text-muted">Footer</div>
+    </div>
+    </body>
+</html>
