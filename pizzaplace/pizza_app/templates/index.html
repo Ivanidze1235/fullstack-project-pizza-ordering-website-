@@ -1,1 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
+{% block body %}
+<div class="card-body bg-secondary">
+<div class="column">
+    <div class="col-lg-4 mt-3 mb-1">
+        <div class="card bg-body-secondary">
+            <div class="card-body">
+                <h3 class="card-title">Cool pizza</h3>
+                <p class="card-text">bottom text</p>
+                <img
+                    src="{% static 'images/pizza-default.jpg' %}"
+                    class="img-fluid rounded-top"
+                    alt=""
+                />
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mt-3 mb-1">
+        <div class="card bg-body-secondary">
+            <div class="card-body">
+                <h3 class="card-title">Title</h3>
+                <p class="card-text">Text</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock body %}
