@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<h2 class="card-header">Log In</h2>
+<form method="post" class="card-body">
+  {% csrf_token %}
+  {{ form }}
+  <button
+    type="submit"
+    class="btn btn-primary"
+>
+    Log in
+</button>
+</form>
+
+{% endblock body %}

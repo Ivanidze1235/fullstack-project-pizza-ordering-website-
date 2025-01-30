@@ -18,7 +18,7 @@
             <a {% if request.get_full_path == "/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/">Main</a>
             
             <a {% if request.get_full_path == "/order/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/order">Order</a>
-            
+            <a {% if request.get_full_path == "/accounts/login/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="{% url "login" %}">Login</a>
         </nav>
         {% endblock nav %}
         {% block body %}
@@ -29,7 +29,7 @@
         </div>
         {% endblock body %}
         
-        <div class="card-footer text-muted bg-secondary">Footer</div>
+        <div class="card-footer text-muted bg-secondary"><div>Copyright: ME</div> <div>2025</div></div>
     </div>
     </body>
 </html>
