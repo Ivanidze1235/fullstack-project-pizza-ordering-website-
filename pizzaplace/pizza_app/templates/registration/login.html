@@ -1,15 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
 {% block body %}
-<h2 class="card-header">Log In</h2>
-<form method="post" class="card-body">
-  {% csrf_token %}
-  {{ form }}
-  <button
-    type="submit"
-    class="btn btn-primary"
->
-    Log in
-</button>
-</form>
-
+    <h2 class="card-header">Log In</h2>
+    <div class="p-2">
+        {% if user.is_authenticated %}
+        <p class="text">Already logged in.</p>
+        {% else %}
+        <form method="post" class="col-lg-4 mt-3 mb-1">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-control m-1">
+                {{ form.username.errors }}
+                <label for="{{ form.username.id_for_label }}">Username:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-control m-1">
+                {{ form.password.errors }}
+                <label for="{{ form.password.id_for_label }}">Password:</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn btn-primary m-1">Login</button>
+        </form>
+        {% endif %}
+    
+</div>
 {% endblock body %}

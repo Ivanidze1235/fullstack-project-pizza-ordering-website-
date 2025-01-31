@@ -11,14 +11,24 @@
     
     
     <body class="bg-primary">
-        <div class="card">
-        <div class="card-header">Pizza dot com</div>
+        <div class="card p-1 border-0">
+        <div class="card-header bg-secondary">
+            <h1>PizzaMaxer</h1>
+            {% if user.is_authenticated %}<p>Hi {{user.username}}</p>{% endif %}
+        </div>
         {% block nav %}
-        <nav class="nav nav-pills flex-row mx-3">
+        <nav class="nav nav-pills flex-row px-3 bg-secondary">
             <a {% if request.get_full_path == "/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/">Main</a>
             
             <a {% if request.get_full_path == "/order/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/order">Order</a>
             <a {% if request.get_full_path == "/accounts/login/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="{% url "login" %}">Login</a>
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button {% if request.get_full_path == "/accounts/login/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} type="submit">Log Out</button>
+              </form>
+            {% endif %}
+            <a {% if request.get_full_path == "/accounts/signup/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="{% url "signup" %}">Sign up</a>
         </nav>
         {% endblock nav %}
         {% block body %}
@@ -29,7 +39,17 @@
         </div>
         {% endblock body %}
         
-        <div class="card-footer text-muted bg-secondary"><div>Copyright: ME</div> <div>2025</div></div>
+        <div class="card-footer text-muted bg-secondary">
+            <!-- Horizontal under breakpoint -->
+            <ul
+                class="list-group list-group-horizontal border-0 bg-transparent"
+            >
+                <li class="list-group-item border-0 bg-transparent">Copyright: ME</li>
+                <li class="list-group-item border-0 bg-transparent">2025</li>
+                <li class="list-group-item border-0 bg-transparent">All rights reserved</li>
+            </ul>
+            
+        </div>
     </div>
     </body>
 </html>
