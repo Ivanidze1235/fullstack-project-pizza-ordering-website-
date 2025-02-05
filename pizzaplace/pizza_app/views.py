@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegisterForm
+from .forms import *
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
@@ -15,6 +15,25 @@ def index(request):
 
 def order(request):
     return render(request, "order.html")
+
+def create(request):
+    if request.method == "POST":
+				# create a new copy of the form with the data the user 
+				# entered , it is stored in request.POST
+        form = PizzaCreationForm(request.POST)
+        if form.is_valid():
+            pizza = form.save() # create the Employee object and save it
+						# send the user to a confirmation page saying
+						# confirming that they filled in the form and the data was saved 
+            return render(request, 'order.html', {'pizza':pizza})
+        else:
+						# form has errors
+						# send the form back to the user
+            return render(request, 'create.html', {'form': form})
+    else:
+        # normal get reuqest, user wants to see the form 
+        form = PizzaCreationForm()
+        return render(request, 'create.html', {'form': form})
 
 def signup(request):
     if request.method == 'POST':

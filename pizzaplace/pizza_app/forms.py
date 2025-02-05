@@ -1,5 +1,6 @@
 
 from django import forms
+from . import models
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
  
@@ -8,3 +9,8 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'phone_no', 'password1', 'password2']
+
+class PizzaCreationForm(forms.ModelForm):
+    class Meta:
+        model = models.Pizza
+        fields = ['size', 'crust']
