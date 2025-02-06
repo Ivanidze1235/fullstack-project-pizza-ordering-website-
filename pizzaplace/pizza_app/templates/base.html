@@ -11,7 +11,7 @@
     
     
     <body class="bg-primary">
-        <div class="card p-1 border-0">
+        <div class="card p-1 border-0 bg-light rounded-0">
         <div class="card-header bg-secondary">
             <h1>PizzaMaxer</h1>
             {% if user.is_authenticated %}<p>Hi {{user.username}}</p>{% endif %}
@@ -20,13 +20,14 @@
         <nav class="nav nav-pills flex-row px-3 bg-secondary">
             <a {% if request.get_full_path == "/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/">Main</a>
             <a {% if request.get_full_path == "/create/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/create">Create and order</a>
-            <a {% if request.get_full_path == "/accounts/login/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="{% url "login" %}">Login</a>
+            
             {% if user.is_authenticated %}
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button {% if request.get_full_path == "/accounts/login/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} type="submit">Log Out</button>
               </form>
             {% else %}
+            <a {% if request.get_full_path == "/accounts/login/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="{% url "login" %}">Login</a>
             <a {% if request.get_full_path == "/accounts/signup/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="{% url "signup" %}">Sign up</a>
             {% endif %}
         </nav>
