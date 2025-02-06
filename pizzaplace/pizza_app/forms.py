@@ -11,6 +11,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'phone_no', 'password1', 'password2']
 
 class PizzaCreationForm(forms.ModelForm):
+    
     class Meta:
         model = models.Pizza
 

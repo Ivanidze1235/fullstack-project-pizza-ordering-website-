@@ -2,42 +2,51 @@ from django.db import models
 
 # Create your models here.
 
+class Sizes(models.Model):
+    size = models.CharField(max_length=300)
+
+class Sauces(models.Model):
+    sauce = models.CharField(max_length=300)
+
+class Cheeses(models.Model):
+    cheese = models.CharField(max_length=300)
+
 class Pizza(models.Model):
     size_choices = (
-        ('S', 'Small'),
-        ('M', 'Medium'),
-        ('L', 'Large')
+        ('Small', 'Small'),
+        ('Medium', 'Medium'),
+        ('Large', 'Large')
     )
 
     crust_choices = (
-        ('N', 'Normal'),
-        ('t', 'Thin'),
-        ('T', 'Thick'),
-        ('NG', 'Gluten-free'),
-        ('C', 'Cardboard')
+        ('Normal', 'Normal'),
+        ('Thin', 'Thin'),
+        ('Thick', 'Thick'),
+        ('Gluten-free', 'Gluten-free'),
+        ('Cardboard', 'Cardboard')
     )
 
     sauce_choices = (
-        ('T', 'Tomato'),
-        ('B', 'BBQ'),
-        ('M', 'Mayonnaise')
+        ('Tomato', 'Tomato'),
+        ('BBQ', 'BBQ'),
+        ('Mayonnaise', 'Mayonnaise')
     )
 
     cheese_choices = (
-        ('M', 'Mozzarella'),
-        ('C', 'Cheddar'),
-        ('V', 'Vegan'),
-        ('L', 'Low fat')
+        ('Mozzarella', 'Mozzarella'),
+        ('Cheddar', 'Cheddar'),
+        ('Vegan', 'Vegan'),
+        ('Low fat', 'Low fat')
     )
 
     toppings_choices = (
-        ('P', 'Pepperoni'),
-        ('C', 'Chicken'),
-        ('H', 'Ham'),
-        ('Pa', 'Pinapple'),
-        ('Pp', 'Peppers'),
-        ('M', 'Mushrooms'),
-        ('O', 'Onions')
+        ('Pepperoni', 'Pepperoni'),
+        ('Chicken', 'Chicken'),
+        ('Ham', 'Ham'),
+        ('Pineapple', 'Pineapple'),
+        ('Peppers', 'Peppers'),
+        ('Mushrooms', 'Mushrooms'),
+        ('Onions', 'Onions')
     )
 
     id = models.AutoField(primary_key=True)
