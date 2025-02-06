@@ -7,7 +7,7 @@
             <h4 class="card-title">Create your pizza</h4>
             <form action="" method="POST">
                 {% csrf_token %}
-                {{ form.as_table }}
+                {{ form.as_p }}
                 <button type="submit">Create Pizza</button>
             </form>
         </div>

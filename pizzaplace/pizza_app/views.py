@@ -13,8 +13,8 @@ from django.template import Context
 def index(request):
     return render(request, "index.html")
 
-def order(request):
-    return render(request, "order.html")
+def order(request, pizza=None):
+    return render(request, "order.html", {'pizza':pizza})
 
 def create(request):
     if request.method == "POST":
@@ -22,9 +22,7 @@ def create(request):
 				# entered , it is stored in request.POST
         form = PizzaCreationForm(request.POST)
         if form.is_valid():
-            pizza = form.save() # create the Employee object and save it
-						# send the user to a confirmation page saying
-						# confirming that they filled in the form and the data was saved 
+            pizza = form.save()
             return render(request, 'order.html', {'pizza':pizza})
         else:
 						# form has errors

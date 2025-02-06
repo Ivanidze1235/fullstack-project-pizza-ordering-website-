@@ -13,4 +13,5 @@ class UserRegisterForm(UserCreationForm):
 class PizzaCreationForm(forms.ModelForm):
     class Meta:
         model = models.Pizza
-        fields = ['size', 'crust']
+
+        fields = ['size', 'crust', 'sauce', 'cheese', 'pepperoni', 'chicken', 'ham', 'pineapple', 'peppers', 'mushrooms', 'onions']
