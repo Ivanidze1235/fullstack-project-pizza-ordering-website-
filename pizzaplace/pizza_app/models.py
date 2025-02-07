@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -34,8 +35,7 @@ class Pizza(models.Model):
         ('Mushrooms', 'Mushrooms'),
         ('Onions', 'Onions')
     )
-    
-    id=models.AutoField(primary_key=True)
+    user = models.CharField(default="none", max_length=100)
 
     size = models.CharField(max_length=300, default="", choices=[(si.size, si.size) for si in Sizes.objects.all()])
     sauce = models.CharField(max_length=300, default="", choices=[(sau.sauce, sau.sauce) for sau in Sauces.objects.all()])

@@ -8,10 +8,12 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from .models import Pizza
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    pizza = Pizza.objects.filter(user=request.user.username)
+    return render(request, "index.html", {'pizzas':pizza})
 
 def order(request, pizza=None):
     return render(request, "order.html", {'pizza':pizza})
@@ -20,9 +22,12 @@ def create(request):
     if request.method == "POST":
 				# create a new copy of the form with the data the user 
 				# entered , it is stored in request.POST
+
         form = PizzaCreationForm(request.POST)
+        form.user = request.user.username
         if form.is_valid():
             pizza = form.save()
+            
             return render(request, 'order.html', {'pizza':pizza})
         else:
 						# form has errors
