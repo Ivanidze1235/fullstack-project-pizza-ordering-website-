@@ -12,8 +12,7 @@ from .models import Pizza
 
 # Create your views here.
 def index(request):
-    pizza = Pizza.objects.filter(user=request.user.username)
-    return render(request, "index.html", {'pizzas':pizza})
+    return render(request, "index.html")
 
 def order(request, pizza=None):
     return render(request, "order.html", {'pizza':pizza})
