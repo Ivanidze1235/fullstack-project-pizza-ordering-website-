@@ -49,7 +49,7 @@ class Pizza(models.Model):
         ('Mushrooms', 'Mushrooms'),
         ('Onions', 'Onions')
     )
-    id = models.AutoField(primary_key=True)
+
     size = models.CharField(max_length=300, choices=size_choices, default="Small")
     crust = models.CharField(max_length=300, choices=crust_choices, default="Normal")
     sauce = models.CharField(max_length=300, choices=sauce_choices, default="Tomato")
@@ -61,3 +61,7 @@ class Pizza(models.Model):
     peppers = models.BooleanField(default=False)
     mushrooms = models.BooleanField(default=False)
     onions = models.BooleanField(default=False)
+
+class Order(models.Model):
+    usr = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
+    pizza = models.ForeignKey(Pizza, on_delete=models.PROTECT, blank=True, null=True)

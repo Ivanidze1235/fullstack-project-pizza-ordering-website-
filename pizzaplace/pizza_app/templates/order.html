@@ -1,9 +1,41 @@
 {% extends "base.html" %}
 {% block body %}
-    <p>{{pizza.size}}</p>
-    <p>{{pizza.crust}}</p>
-    <p>{{pizza.sauce}}</p>
-    <p>{{pizza.cheese}}</p>
     
-    {% if pizza.pepperoni == True %}<p>Pepperoni</p>{% endif %}
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Your pizza:</h3>
+                <ul class="list-group list-group">
+                    <li class="list-group-item border-0">Size: {{pizza.size}}</li>
+                    <li class="list-group-item border-0">Crust: {{pizza.crust}}</li>
+                    <li class="list-group-item border-0">Sauce: {{pizza.sauce}}</li>
+                    <li class="list-group-item border-0">Cheese: {{pizza.cheese}}</li>
+                    <li class="list-group-item border-0">
+                        <p>Ingredients:</p>
+                        <ul class="list-group list-group-horizontal">
+                            {% if pizza.pepperoni == True %}<li class="list-group-item">Pepperoni</li>{% endif %}
+                            {% if pizza.chicken == True %}<li class="list-group-item">Chicken</li>{% endif %}
+                            {% if pizza.ham == True %}<li class="list-group-item">Ham</li>{% endif %}
+                            {% if pizza.pineapple == True %}<li class="list-group-item">Pineapple</li>{% endif %}
+                            {% if pizza.peppers == True %}<li class="list-group-item">Peppers</li>{% endif %}
+                            {% if pizza.mushrooms == True %}<li class="list-group-item">Mushrooms</li>{% endif %}
+                            {% if pizza.onions == True %}<li class="list-group-item">Onions</li>{% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Title</h3>
+                <p class="card-text">Text</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
 {% endblock body %}
