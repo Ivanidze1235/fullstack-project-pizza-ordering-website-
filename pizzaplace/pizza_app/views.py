@@ -13,13 +13,27 @@ from .models import *
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        orders = Order.objects.filter(usr=request.user)
+        orders = Order.objects.filter(usr=request.user)[::-1]
     else:
         orders = None
     return render(request, "index.html", {'orders':orders})
 
-def order(request, pizza=None):
-    return render(request, "order.html", {'pizza':pizza})
+def order(request, pizza_id):
+    print(request.path)
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            order.usr = request.user
+            order.pizza = Pizza.objects.get(id=pizza_id)
+            order.save()
+            return redirect('index')
+        else:
+            form = OrderForm()
+            return render(request, "order.html")
+    else:
+        form = OrderForm()
+        return render(request, "order.html", {'pizza':Pizza.objects.get(id=pizza_id), 'ordform':form})
 
 def create(request):
     if request.method == "POST":
@@ -29,11 +43,9 @@ def create(request):
         form = PizzaCreationForm(request.POST)
         
         if form.is_valid():
-            pizza = form.save()
-            order = Order(usr=request.user, pizza=pizza)
-            order.save()
             
-            return render(request, 'order.html', {'pizza':pizza})
+            pizza = form.save()
+            return redirect("order", pizza.id)
         else:
 						# form has errors
 						# send the form back to the user

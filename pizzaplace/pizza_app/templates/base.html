@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <script src="{% static 'js/bootstrap.js'%}"></script>
-        <title>Pizza.com</title>
+        <title>PizzaMaxer.com</title>
     </head>
     
     
@@ -19,7 +19,8 @@
         {% block nav %}
         <nav class="nav nav-pills flex-row px-3 bg-secondary">
             <a {% if request.get_full_path == "/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/">Main</a>
-            <a {% if request.get_full_path == "/create/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/create">Create and order</a>
+            <a {% if request.get_full_path == "/create/" %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark"{% endif %} href="/create">Create</a>
+            <a {% if 'order' in request.get_full_path %} class="nav-link active" aria-current="page" {% else %} class="nav-link text-dark-subtle disabled"{% endif %} href="/create">Order</a>
             {% if user.is_authenticated %}
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}

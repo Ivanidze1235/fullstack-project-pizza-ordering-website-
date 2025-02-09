@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -65,3 +66,9 @@ class Pizza(models.Model):
 class Order(models.Model):
     usr = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
     pizza = models.ForeignKey(Pizza, on_delete=models.PROTECT, blank=True, null=True)
+    date = models.DateField(auto_now=True)
+    name = models.CharField(max_length=50, default="joe")
+    address = models.CharField(max_length=50, default="Negra Arroyo lane")
+    card_number = models.CharField(max_length=16, default="0000000000000000")
+    exp_date = models.DateField(default=datetime.date.today)
+    cvv = models.CharField(max_length=3, default="000")

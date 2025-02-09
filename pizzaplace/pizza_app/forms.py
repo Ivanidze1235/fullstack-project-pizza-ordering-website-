@@ -20,3 +20,9 @@ class PizzaCreationForm(forms.ModelForm):
         model = models.Pizza
 
         fields = ['size', 'crust', 'sauce', 'cheese', 'pepperoni', 'chicken', 'ham', 'pineapple', 'peppers', 'mushrooms', 'onions']
+
+class OrderForm(forms.ModelForm):
+    exp_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    class Meta:
+        model = models.Order
+        fields = ['name', 'address', 'card_number', 'exp_date', 'cvv']

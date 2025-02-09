@@ -1,53 +1,56 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body %}
-<div class="card-body bg-primary">
-<div class="column">
-    <div class="col-lg-4 mt-3 mb-1">
+
+
+<div
+    class="row justify-content-around align-items-left g-2"
+>
+    <div class="col-lg-5 m-3">
         <div class="card bg-body-secondary">
             <div class="card-body">
-                <h3 class="card-title">Cool pizza</h3>
-                <p class="card-text">bottom text</p>
-                <img
-                    src="{% static 'images/pizza-default.jpg' %}"
-                    class="img-fluid rounded-top"
-                    alt=""
-                />
-                
+                <h4 class="card-title">Welcome</h4>
+                <p>On this website, you can create and order pizzas</p>
             </div>
         </div>
     </div>
     {% if user.is_authenticated %}
-    <div class="col-lg-4 mt-3 mb-1">
+    <div class="col-lg-5 m-3">
         <div class="card bg-body-secondary">
             <div class="card-body">
-                <h3 class="card-title">Previous orders:</h3>
+                <h4 class="card-title">Previous orders:</h4>
                 {% for order in orders %}
-                <ul class="list-group list-group">
+                <ul class="list-group list-group mb-4">
                     <li class="list-group-item">Size: {{order.pizza.size}}</li>
                     <li class="list-group-item">Crust: {{order.pizza.crust}}</li>
                     <li class="list-group-item">Sauce: {{order.pizza.sauce}}</li>
                     <li class="list-group-item">Cheese: {{order.pizza.cheese}}</li>
                     <li class="list-group-item">
                         <p>Ingredients:</p>
-                        <ul class="list-group list-group-horizontal">
-                            {% if order.pizza.pepperoni == True %}<li class="list-group-item">Pepperoni</li>{% endif %}
-                            {% if order.pizza.chicken == True %}<li class="list-group-item">Chicken</li>{% endif %}
-                            {% if order.pizza.ham == True %}<li class="list-group-item">Ham</li>{% endif %}
-                            {% if order.pizza.pineapple == True %}<li class="list-group-item">Pineapple</li>{% endif %}
-                            {% if order.pizza.peppers == True %}<li class="list-group-item">Peppers</li>{% endif %}
-                            {% if order.pizza.mushrooms == True %}<li class="list-group-item">Mushrooms</li>{% endif %}
-                            {% if order.pizza.onions == True %}<li class="list-group-item">Onions</li>{% endif %}
+                        <ul class="list-group list-group-horizontal flex-wrap">
+                            {% if order.pizza.pepperoni == True %}<li class="list-inline-item">Pepperoni</li>{% endif %}
+                            {% if order.pizza.chicken == True %}<li class="list-inline-item">Chicken</li>{% endif %}
+                            {% if order.pizza.ham == True %}<li class="list-inline-item">Ham</li>{% endif %}
+                            {% if order.pizza.pineapple == True %}<li class="list-inline-item">Pineapple</li>{% endif %}
+                            {% if order.pizza.peppers == True %}<li class="list-inline-item">Peppers</li>{% endif %}
+                            {% if order.pizza.mushrooms == True %}<li class="list-inline-item">Mushrooms</li>{% endif %}
+                            {% if order.pizza.onions == True %}<li class="list-inline-item">Onions</li>{% endif %}
                         </ul>
                     </li>
+                    <li class="list-group-item bg-body-secondary p-1"></li>
+                    <li class="list-group-item">{{order.date}}</li>
+                    <li class="list-group-item">Name: {{order.name}}</li>
+                    <li class="list-group-item">Address: {{order.address}}</li>
                 </ul>
+
                 {% endfor %}
             </div>
         </div>
     </div>
     </div>
     {% endif %}
-    
 </div>
+
+
 
 {% endblock body %}

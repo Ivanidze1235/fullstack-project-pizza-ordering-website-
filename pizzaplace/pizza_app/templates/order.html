@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
     
-<div class="row">
-    <div class="col-4">
-        <div class="card">
+<div class="row justify-content-around">
+    <div class="col-lg-5 m-3">
+        <div class="card bg-body-secondary">
             <div class="card-body">
                 <h3 class="card-title">Your pizza:</h3>
                 <ul class="list-group list-group">
@@ -13,7 +13,7 @@
                     <li class="list-group-item border-0">Cheese: {{pizza.cheese}}</li>
                     <li class="list-group-item border-0">
                         <p>Ingredients:</p>
-                        <ul class="list-group list-group-horizontal">
+                        <ul class="list-group list-group-horizontal flex-wrap">
                             {% if pizza.pepperoni == True %}<li class="list-group-item">Pepperoni</li>{% endif %}
                             {% if pizza.chicken == True %}<li class="list-group-item">Chicken</li>{% endif %}
                             {% if pizza.ham == True %}<li class="list-group-item">Ham</li>{% endif %}
@@ -27,15 +27,18 @@
             </div>
         </div>
     </div>
-    <div class="col-4">
-        <div class="card">
+    <div class="col-lg-5 m-3">
+        <div class="card bg-body-secondary">
             <div class="card-body">
-                <h3 class="card-title">Title</h3>
-                <p class="card-text">Text</p>
+                <h3 class="card-title">Complete order</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ordform.as_p}}
+                    <button type="submit">Order</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
     
 {% endblock body %}
