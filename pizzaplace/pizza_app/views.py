@@ -37,21 +37,13 @@ def order(request, pizza_id):
 
 def create(request):
     if request.method == "POST":
-				# create a new copy of the form with the data the user 
-				# entered , it is stored in request.POST
-
         form = PizzaCreationForm(request.POST)
-        
         if form.is_valid():
-            
             pizza = form.save()
             return redirect("order", pizza.id)
         else:
-						# form has errors
-						# send the form back to the user
             return render(request, 'create.html', {'form': form})
     else:
-        # normal get reuqest, user wants to see the form 
         form = PizzaCreationForm()
         return render(request, 'create.html', {'form': form})
 

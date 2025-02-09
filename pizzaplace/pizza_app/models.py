@@ -6,19 +6,20 @@ import datetime
 
 class Sizes(models.Model):
     size = models.CharField(max_length=300)
+    def __str__(self):
+        return self.size
 
 class Sauces(models.Model):
     sauce = models.CharField(max_length=300)
+    def __str__(self):
+        return self.sauce
 
 class Cheeses(models.Model):
     cheese = models.CharField(max_length=300)
+    def __str__(self):
+        return self.cheese
 
 class Pizza(models.Model):
-    size_choices = (
-        ('Small', 'Small'),
-        ('Medium', 'Medium'),
-        ('Large', 'Large')
-    )
 
     crust_choices = (
         ('Normal', 'Normal'),
@@ -28,33 +29,10 @@ class Pizza(models.Model):
         ('Cardboard', 'Cardboard')
     )
 
-    sauce_choices = (
-        ('Tomato', 'Tomato'),
-        ('BBQ', 'BBQ'),
-        ('Mayonnaise', 'Mayonnaise')
-    )
-
-    cheese_choices = (
-        ('Mozzarella', 'Mozzarella'),
-        ('Cheddar', 'Cheddar'),
-        ('Vegan', 'Vegan'),
-        ('Low fat', 'Low fat')
-    )
-
-    toppings_choices = (
-        ('Pepperoni', 'Pepperoni'),
-        ('Chicken', 'Chicken'),
-        ('Ham', 'Ham'),
-        ('Pineapple', 'Pineapple'),
-        ('Peppers', 'Peppers'),
-        ('Mushrooms', 'Mushrooms'),
-        ('Onions', 'Onions')
-    )
-
-    size = models.CharField(max_length=300, choices=size_choices, default="Small")
+    size = models.ForeignKey(Sizes, on_delete=models.CASCADE, null=True)
     crust = models.CharField(max_length=300, choices=crust_choices, default="Normal")
-    sauce = models.CharField(max_length=300, choices=sauce_choices, default="Tomato")
-    cheese = models.CharField(max_length=300, choices=cheese_choices, default="Cheddar")
+    sauce = models.ForeignKey(Sauces, on_delete=models.CASCADE, null=True)
+    cheese = models.ForeignKey(Cheeses, on_delete=models.CASCADE, null=True)
     pepperoni = models.BooleanField(default=False)
     chicken = models.BooleanField(default=False)
     ham = models.BooleanField(default=False)
