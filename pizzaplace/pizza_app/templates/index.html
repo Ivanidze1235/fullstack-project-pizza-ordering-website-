@@ -6,20 +6,24 @@
 <div
     class="row justify-content-around align-items-left g-2"
 >
-    <div class="col-lg-5 m-3">
+    <div class="col-lg-8 m-3">
         <div class="card bg-body-secondary">
             <div class="card-body">
                 <h4 class="card-title">Welcome</h4>
                 <p>On this website, you can create and order pizzas</p>
+                <p><i>Try out our Cardboard Crust pizza!</i></p>
+                <img class="card-img" src="{% static "images/pizza.jpg" %}" alt="Cardboard pizza. Literally. Source: https://puttisworld.blogspot.com/2010/09/cardboard-pizza.html">
+                <p>Note: ordering without an account makes us unable to display your orders</p>
             </div>
         </div>
     </div>
     {% if user.is_authenticated %}
-    <div class="col-lg-5 m-3">
+    <div class="col-lg-3 m-3">
         <div class="card bg-body-secondary">
             <div class="card-body">
                 <h4 class="card-title">Previous orders:</h4>
                 {% for order in orders %}
+                {{order.date}}
                 <ul class="list-group list-group mb-4">
                     <li class="list-group-item">Size: {{order.pizza.size}}</li>
                     <li class="list-group-item">Crust: {{order.pizza.crust}}</li>
@@ -38,7 +42,7 @@
                         </ul>
                     </li>
                     <li class="list-group-item bg-body-secondary p-1"></li>
-                    <li class="list-group-item">{{order.date}}</li>
+                    
                     <li class="list-group-item">Name: {{order.name}}</li>
                     <li class="list-group-item">Address: {{order.address}}</li>
                 </ul>

@@ -1,8 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 import datetime
 
 # Create your models here.
+
+def validate_card(value):
+    if len(value) != 16 or not str.isdigit(value):
+        raise ValidationError("Card number should be 16 digits long and a number.")
+
+def validate_cvv(value):
+    if len(value) != 3 or not str.isdigit(value):
+        raise ValidationError("Cvv should be 3 digits long and a number.")
+
+def validate_date(value):
+    if value < datetime.date.today():
+        raise ValidationError("Card expired.")
+
+def validate_address(value):
+    if value == "":
+        raise ValidationError("Empty address.")
+
 
 class Sizes(models.Model):
     size = models.CharField(max_length=300)
@@ -29,10 +47,10 @@ class Pizza(models.Model):
         ('Cardboard', 'Cardboard')
     )
 
-    size = models.ForeignKey(Sizes, on_delete=models.CASCADE, null=True)
+    size = models.ForeignKey(Sizes, on_delete=models.CASCADE, default=1)
     crust = models.CharField(max_length=300, choices=crust_choices, default="Normal")
-    sauce = models.ForeignKey(Sauces, on_delete=models.CASCADE, null=True)
-    cheese = models.ForeignKey(Cheeses, on_delete=models.CASCADE, null=True)
+    sauce = models.ForeignKey(Sauces, on_delete=models.CASCADE, default=1)
+    cheese = models.ForeignKey(Cheeses, on_delete=models.CASCADE, default=1)
     pepperoni = models.BooleanField(default=False)
     chicken = models.BooleanField(default=False)
     ham = models.BooleanField(default=False)
@@ -45,8 +63,8 @@ class Order(models.Model):
     usr = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
     pizza = models.ForeignKey(Pizza, on_delete=models.PROTECT, blank=True, null=True)
     date = models.DateField(auto_now=True)
-    name = models.CharField(max_length=50, default="joe")
-    address = models.CharField(max_length=50, default="Negra Arroyo lane")
-    card_number = models.CharField(max_length=16, default="0000000000000000")
-    exp_date = models.DateField(default=datetime.date.today)
-    cvv = models.CharField(max_length=3, default="000")
+    name = models.CharField(max_length=50, default="Name")
+    address = models.CharField(max_length=300, default="1, Main Street, Dublin", validators=[validate_address])
+    card_number = models.CharField(max_length=16, default="0000000000000000", validators=[validate_card])
+    exp_date = models.DateField(default=datetime.date.today, validators=[validate_date])
+    cvv = models.CharField(max_length=3, default="000", validators=[validate_cvv])

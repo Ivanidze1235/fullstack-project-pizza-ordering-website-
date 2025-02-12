@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block nav %}{% endblock nav %}
+{% block body %}
+<div class="card bg-body-secondary m-3 col-lg-6 align-self-center">
+    <div class="card-body">
+        <h4 class="card-title">Your order:</h4>
+        {{order.date}}
+        <ul class="list-group list-group mb-4">
+            <li class="list-group-item">Size: {{order.pizza.size}}</li>
+            <li class="list-group-item">Crust: {{order.pizza.crust}}</li>
+            <li class="list-group-item">Sauce: {{order.pizza.sauce}}</li>
+            <li class="list-group-item">Cheese: {{order.pizza.cheese}}</li>
+            <li class="list-group-item">
+                <p>Ingredients:</p>
+                <ul class="list-group list-group-horizontal flex-wrap">
+                    {% if order.pizza.pepperoni == True %}<li class="list-inline-item">Pepperoni</li>{% endif %}
+                    {% if order.pizza.chicken == True %}<li class="list-inline-item">Chicken</li>{% endif %}
+                    {% if order.pizza.ham == True %}<li class="list-inline-item">Ham</li>{% endif %}
+                    {% if order.pizza.pineapple == True %}<li class="list-inline-item">Pineapple</li>{% endif %}
+                    {% if order.pizza.peppers == True %}<li class="list-inline-item">Peppers</li>{% endif %}
+                    {% if order.pizza.mushrooms == True %}<li class="list-inline-item">Mushrooms</li>{% endif %}
+                    {% if order.pizza.onions == True %}<li class="list-inline-item">Onions</li>{% endif %}
+                </ul>
+            </li>
+            <li class="list-group-item bg-body-secondary p-1"></li>
+            
+            <li class="list-group-item">Name: {{order.name}}</li>
+            <li class="list-group-item">Address: {{order.address}}</li>
+            <a
+                class="btn btn-primary mt-2"
+                href="{% url 'index' %}"
+                role="button"
+                >Home</a
+            >
+            
+        </ul>
+    </div>
+</div>
+{% endblock body %}

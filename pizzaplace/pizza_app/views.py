@@ -18,19 +18,25 @@ def index(request):
         orders = None
     return render(request, "index.html", {'orders':orders})
 
+def confirmation(request, order_id):
+    return render(request, "confirmation.html", {'order':Order.objects.get(id=order_id)})
+
 def order(request, pizza_id):
     print(request.path)
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save()
-            order.usr = request.user
+            try:
+                order.usr = request.user
+            except:
+                order.usr = None
             order.pizza = Pizza.objects.get(id=pizza_id)
             order.save()
-            return redirect('index')
+            return redirect('confirmation', order.id)
         else:
-            form = OrderForm()
-            return render(request, "order.html")
+            #form = OrderForm()
+            return render(request, "order.html", {'ordform':form})
     else:
         form = OrderForm()
         return render(request, "order.html", {'pizza':Pizza.objects.get(id=pizza_id), 'ordform':form})
